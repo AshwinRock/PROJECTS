@@ -1,0 +1,170 @@
+create warehouse projects;
+create database assignments;
+truncate table first;
+
+1.------------------------------------------------------------------------------------
+create table first(
+id int,
+value int
+);
+
+insert into first (id,value) values
+(1,-56),(2,76),(3,-84),(4,96),(5,-47);
+
+select * from first;
+
+select value*-1 as negation from first;
+
+
+2.-Select all the divisions that have had revenue this year-------------------------------------------------------------------------------------------
+
+create table second(division_id int, year int, revenue int);
+drop table second;
+
+insert into second(division_id ,year, revenue) values
+(1,'2018',60),(1,'2021',40),(1,'2020',70),(2,'2021',-10),(3,'2018',20),(3,'2016',40),(4,'2021',50);
+
+select * from second;
+
+select division_id from second where year='2021' and revenue>0 order by division_id;
+
+
+3.-Find the century for the year--------------------------------------------------------------------------------------------
+
+create table third(
+id int,
+year int
+);
+
+insert into third(id ,year) values
+
+(1,1776),(2,2001),(3,1643),(4,1865),(5,1969);
+
+select * from third;
+
+select (ceil(substring(year,1,2)+1)) as century from third;
+
+4.-Even or odd------------------------------------------------------------------------------------------------
+
+create table fourth(
+id int,
+value int
+);
+
+insert into fourth(id,value) values
+(1,4),(2,11),(3,57),(4,24),(5,47);
+
+select * from fourth;
+
+select
+    case
+        when (value%2=0) then 'Even'
+        else 'Odd'
+        end as oddOreven
+        from fourth;
+
+5.-Group by age-------------------------------------------------------------------------------------------------------
+
+create table fifth(id int, name varchar, age int);
+insert into fifth(id,name,age)values
+(1,'Bob',21),
+(2,'Sam',19),
+(3,'Jil',18),
+(4,'Jim',21),
+(5,'Sally',19),
+(6,'Jess',20),
+(7,'Will',21);
+
+select * from fifth;
+
+select age,count(age) same_aged from fifth group by age order by age;
+
+6.-Return a greeting string-----------------------------------------------------------------------------------------------------------
+
+create table sixth(id int, name varchar);
+insert into sixth(id,name)values
+(1,'Bob'),
+(2,'Sam'),
+(3,'Jil'),
+(4,'Jim'),
+(5,'Sally'),
+(6,'Jess'),
+(7,'Will');
+
+select * from sixth;
+
+select *,concat('Hi ',name,'! How are you today?')as Greeting from sixth;
+
+7.-Find the best selling products-------------------------------------------------------------------------------------------------------------
+
+create table seventh(id int, name varchar, amount_sold int);
+insert into seventh (id,name,amount_sold)values
+(1,'Cup',11),
+(2,'Saucer',22),
+(3,'Plate',46),
+(4,'Fork',34),
+(5,'Spoon',45),
+(6,'Knife',78),
+(7,'Mug',23),
+(8,'Glass',64),
+(9,'Tumbler',74);
+
+select * from seventh;
+
+SELECT name, amount_sold
+FROM seventh
+ORDER BY amount_sold DESC
+LIMIT 5;
+
+8.-Who needs a passport-----------------------------------------------------------------------------------------------------------------
+
+create table eigth(id int, name varchar, country varchar);
+insert into eigth (id,name,country)values
+(1,'Bob Smith','United States'),
+(2,'Jim Jones','China'),
+(3,'Sam White','Japan'),
+(4,'Jess Black','Canada'),
+(5,'Will Wilson','Germany'),
+(6,'Wilson Scott','England'),
+(7,'Scott Daniels','France'),
+(8,'Daniel Jackson','Canada'),
+(9,'Jack Johnson','United States');
+
+select * from eigth;
+
+select name from eigth where country not in ('United States','Canada');
+
+9.-Just the unique values----------------------------------------------------------------------------------------------------------------
+
+create table ninth(id int, name varchar, age int);
+insert into ninth(id,name,age)values
+(1,'Bob',21),
+(2,'Sam',19),
+(3,'Jil',18),
+(4,'Jim',21),
+(5,'Sally',19),
+(6,'Jess',20),
+(7,'Will',21);
+
+select * from ninth;
+
+select distinct(age) from ninth order by age asc;
+
+10.-Add the ages-------------------------------------------------------------------------------------------------------------------
+
+create table tenth(id int, name varchar, age int);
+insert into tenth(id,name,age)values
+(1,'Bob',21),
+(2,'Sam',19),
+(3,'Jil',18),
+(4,'Jim',21),
+(5,'Sally',19),
+(6,'Jess',20),
+(7,'Will',21);
+
+select * from tenth;
+
+select sum(age) from tenth;
+
+
+Check out Codecademy assignment page from here:https://www.codecademy.com/resources/blog/sql-code-challenges-for-beginners/
